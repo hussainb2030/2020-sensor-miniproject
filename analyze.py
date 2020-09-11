@@ -24,7 +24,9 @@ def load_data(file: Path) -> T.Dict[str, pandas.DataFrame]:
     occupancy = {}
     co2 = {}
 
-    with open(file, "r") as f:
+    """with open('file', "r") as f:"""
+    with open('data.txt', "r") as f:
+
         for line in f:
             r = json.loads(line)
             room = list(r.keys())[0]
@@ -48,13 +50,14 @@ if __name__ == "__main__":
     p.add_argument("file", help="path to JSON data file")
     P = p.parse_args()
 
-    file = Path(P.file).expanduser()
+    """ file = Path(P.file).expanduser()"""
+    file = "log.json"
 
     data = load_data(file)
-
     for k in data:
         # data[k].plot()
         time = data[k].index
+        print(data[k].index)
         data[k].hist()
         plt.figure()
         plt.hist(np.diff(time.values).astype(np.int64) // 1000000000)

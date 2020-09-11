@@ -16,7 +16,9 @@ import zlib
 from pathlib import Path
 import argparse
 import asyncio
+import pandas as pd
 
+from pathlib import Path
 
 async def main(port: int, addr: str, max_packets: int, log_file: Path = None):
     """
@@ -34,7 +36,9 @@ async def main(port: int, addr: str, max_packets: int, log_file: Path = None):
     log_file: pathlib.Path
         where to store the data received (student must add code for this)
     """
-
+    temperature = {}
+    occupancy = {}
+    co2 = {}
     if log_file:
         log_file = Path(log_file).expanduser()
 
@@ -48,12 +52,23 @@ async def main(port: int, addr: str, max_packets: int, log_file: Path = None):
         else:
             print(qb)
         print("the secret message is: ",secret)
+        """file = open("data.txt","w+")
+"""
+
         for i in range(max_packets):
             data = await websocket.recv()
             if i % 5 == 0:
                 pass
                 # print(f"{i} total messages received")
             print(data)
+        
+            """stored_data = pd.read_csv("data.txt", sep = "\t")
+            print(stored_data)"""
+
+        """ file.write(data + "\n")
+            file.flush()
+        file.close()
+"""
 
 
 def cli():

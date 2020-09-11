@@ -39,14 +39,15 @@ async def main(port: int, addr: str, max_packets: int, log_file: Path = None):
         log_file = Path(log_file).expanduser()
 
     uri = f"ws://{addr}:{port}"
-
+    
     async with websockets.connect(uri) as websocket:
         qb = await websocket.recv()
+        secret = qb
         if isinstance(qb, bytes):
             print(zlib.decompress(qb).decode("utf8"))
         else:
             print(qb)
-
+        print("the secret message is: ",secret)
         for i in range(max_packets):
             data = await websocket.recv()
             if i % 5 == 0:

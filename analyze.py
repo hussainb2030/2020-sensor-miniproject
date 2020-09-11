@@ -8,7 +8,7 @@ These dictionaries are immediately put into Pandas DataFrames for easier process
 
 Feel free to save your data in a better format--I was just showing what one might do quickly.
 """
-import pandas
+import pandas 
 from pathlib import Path
 import argparse
 import json
@@ -24,11 +24,14 @@ def load_data(file: Path) -> T.Dict[str, pandas.DataFrame]:
     occupancy = {}
     co2 = {}
 
-    with open(file, "r") as f:
+    """with open('file', "r") as f:"""
+    with open('data2.txt', "r") as f:
         for line in f:
             r = json.loads(line)
             room = list(r.keys())[0]
             time = datetime.fromisoformat(r[room]["time"])
+            #print(room)
+            #print(time)
 
             temperature[time] = {room: r[room]["temperature"][0]}
             occupancy[time] = {room: r[room]["occupancy"][0]}
@@ -48,16 +51,37 @@ if __name__ == "__main__":
     p.add_argument("file", help="path to JSON data file")
     P = p.parse_args()
 
-    file = Path(P.file).expanduser()
+    """file = Path(P.file).expanduser()"""
+    file = "data2.txt"
 
     data = load_data(file)
+    #print(data)
 
+    #stats=pandas.DataFrame()
     for k in data:
+        #t = data["occupancy"]
+        #print(t)
         # data[k].plot()
+        if k == 'temperature':
+            print('Temperature Median is:')
+            print(data[k].median())
+            print('Temperature Variance is:')
+            print(data[k].var())
+            print('Temperature Standard Deviation is:')
+            print(data[k].std())
+        if k == 'occupancy':
+                print('Occupancy Median is:')
+                print(data[k].median())
+                print('Occupancy Variance is:')
+                print(data[k].var())
+                print('Occupancy Standard Deviation is:')
+                print(data[k].std())
+        """
         time = data[k].index
         data[k].hist()
         plt.figure()
         plt.hist(np.diff(time.values).astype(np.int64) // 1000000000)
         plt.xlabel("Time (seconds)")
-
+        """
     plt.show()
+    

@@ -56,14 +56,28 @@ if __name__ == "__main__":
 
     data = load_data(file)
     #print(data)
-    counter = 0
-    numer_of_data = len(data['temperature'].office)
-    print(numer_of_data)
+    counter_office = 0
+    counter_class = 0
+    counter_lab = 0
+    number_of_data_office = len(data['temperature'].office)
+    number_of_data_class = len(data['temperature'].class1)
+    number_of_data_lab = len(data['temperature'].lab1)
+    #print(numer_of_data)
     for x in range(len(data['temperature'])):
         if(not(math.isnan(data['temperature'].office[x]))):
             #print(data['temperature'].office[x])
             if(abs(data['temperature'].office[x]-data['temperature'].median().office)>= 2 * data['temperature'].std().office):
-                counter +=1
+                counter_office +=1
+    for x in range(len(data['temperature'])):
+        if(not(math.isnan(data['temperature'].lab1[x]))):
+            #print(data['temperature'].office[x])
+            if(abs(data['temperature'].lab1[x]-data['temperature'].median().lab1)>= 2 * data['temperature'].std().lab1):
+                counter_lab +=1
+    for x in range(len(data['temperature'])):
+        if(not(math.isnan(data['temperature'].class1[x]))):
+            #print(data['temperature'].office[x])
+            if(abs(data['temperature'].class1[x]-data['temperature'].median().class1)>= 2 * data['temperature'].std().class1):
+                counter_class +=1
     #stats=pandas.DataFrame()
     for k in data:
         #t = data["occupancy"]
@@ -147,7 +161,11 @@ if __name__ == "__main__":
     time_series.plot.kde()
     plt.title("Time interval probability density function")
         
-    percentage =  (numer_of_data-counter)/(numer_of_data) * 100  
-    print("there are ", 100 -percentage, " % data point in temprature")
-    #plt.show()
+    percentage_class =  (number_of_data_class-counter_class)/(number_of_data_class) * 100  
+    percentage_lab =  (number_of_data_lab-counter_lab)/(number_of_data_lab) * 100  
+    percentage_office =  (number_of_data_office-counter_office)/(number_of_data_office) * 100  
+    print("there are ", 100 - percentage_class, " % bad data in class1")
+    print("there are ", 100 - percentage_lab, " % bad data in lab1")
+    print("there are ", 100 - percentage_office, " % bad data in office")
+    plt.show()
     

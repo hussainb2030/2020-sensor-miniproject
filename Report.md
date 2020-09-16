@@ -112,11 +112,11 @@ Task 4:
   
 2)how is this simulation deficient? What factors does it fail to account for?
   
-     The simulation involves the upper and lower bounds and observes data without bad numbers/elements for temperature. It doens't do the same for the occupancy and the co2. It may be possible that there could be anomalies in occupancy and co2. If there are, then there are good and bad values for temperature mixed with good and bad values for the occupancy and co2. 
+   The simulation involves the upper and lower bounds and observes data without bad numbers/elements for temperature. It doens't do the same for the occupancy and the co2. It may be possible that there could be anomalies in occupancy and co2. If there are, then there are good and bad values for temperature mixed with good and bad values for the occupancy and co2. 
   
 3)how is the difficulty of initially using this Python websockets library as compared to a compiled language e.g. C++ websockets
   
-     The difficulty in learning and using the attributes in the library is close to the same of learning compiled language. The difficulty in working with the websockets was figuring out how to use the pandas dataframe.
+   The difficulty in learning and using the attributes in the library is close to the same of learning compiled language. The difficulty in working with the websockets was figuring out how to use the pandas dataframe.
   
 4) would it be better to have the server poll the sensors, or the sensors reach out to the server when they have data?
   

@@ -23,9 +23,9 @@ def load_data(file: Path) -> T.Dict[str, pandas.DataFrame]:
     temperature = {}
     occupancy = {}
     co2 = {}
-
-    """with open('file', "r") as f:"""
-    with open('log.txt', "r") as f:
+    # Read the data from the file
+    with open(file, "r") as f:
+    #with open('log.txt', "r") as f:
         for line in f:
             r = json.loads(line)
             room = list(r.keys())[0]
@@ -51,38 +51,41 @@ if __name__ == "__main__":
     p.add_argument("file", help="path to JSON data file")
     P = p.parse_args()
 
-    """file = Path(P.file).expanduser()"""
-    file = "log.txt"
+    file = Path(P.file).expanduser()
+    #print(file)
+    #file = "log.txt"
 
     data = load_data(file)
     #print(data)
+    #store the data in teh file on the variable data
+    #create some variables 
     counter_office = 0
     counter_class = 0
     counter_lab = 0
-    number_of_data_office = len(data['temperature'].office)
-    number_of_data_class = len(data['temperature'].class1)
-    number_of_data_lab = len(data['temperature'].lab1)
+    #clean the data from NaN values
+    number_of_data_office = len(data['temperature'].office.dropna())
+    number_of_data_class = len(data['temperature'].class1.dropna())
+    number_of_data_lab = len(data['temperature'].lab1.dropna())
+    data_office = data['temperature'].office
+    #print(data_office)
+    data_class = data['temperature'].class1.dropna()
+    data_lab = data['temperature'].lab1.dropna()
+    #print(number_of_data_lab)
+    #print(number_of_data_class)
+    #print(number_of_data_office)
+    numer_of_data = len(data['temperature'])
     #print(numer_of_data)
-    for x in range(len(data['temperature'])):
-        if(not(math.isnan(data['temperature'].office[x]))):
-            #print(data['temperature'].office[x])
-            if(abs(data['temperature'].office[x]-data['temperature'].median().office)>= 2 * data['temperature'].std().office):
-                counter_office +=1
-    for x in range(len(data['temperature'])):
-        if(not(math.isnan(data['temperature'].lab1[x]))):
-            #print(data['temperature'].office[x])
-            if(abs(data['temperature'].lab1[x]-data['temperature'].median().lab1)>= 2 * data['temperature'].std().lab1):
-                counter_lab +=1
-    for x in range(len(data['temperature'])):
-        if(not(math.isnan(data['temperature'].class1[x]))):
-            #print(data['temperature'].office[x])
-            if(abs(data['temperature'].class1[x]-data['temperature'].median().class1)>= 2 * data['temperature'].std().class1):
-                counter_class +=1
+    indices_office = []
+    indices_class = []
+    indices_lab = []
+
     #stats=pandas.DataFrame()
+    #calculate the statistic of the data
     for k in data:
         #t = data["occupancy"]
         #print(t)
         #data[k].plot()
+        #for the temprature
         if k == 'temperature':
             print('Temperature Median is:')
             print(data[k].median())
@@ -112,7 +115,7 @@ if __name__ == "__main__":
             if(not(math.isnan(data[k].office[0]))):
                 print(data[k].office[0])
             """
-
+        #for the occupancy
         if k == 'occupancy':
             print('Occupancy Median is:')
             print(data[k].median())
@@ -129,6 +132,7 @@ if __name__ == "__main__":
         plt.hist(np.diff(time.values).astype(np.int64) // 1000000000)
         plt.xlabel("Time (seconds)")
         """
+        #plot hte probability density
         if k == 'temperature':
             data[k].plot.kde()
             plt.title('Temperature probability density function')
@@ -143,6 +147,7 @@ if __name__ == "__main__":
         #print("here are the time data   :")
         #print(data['temperature'].index[:-1]) 
 
+    #statistic for the time difference
     time_diffrence = data['temperature'].index[1:] - data['temperature'].index[:-1]
     #print(time_diffrence)
     time = [t.total_seconds() for t in time_diffrence]
@@ -160,12 +165,93 @@ if __name__ == "__main__":
     plt.figure()
     time_series.plot.kde()
     plt.title("Time interval probability density function")
-        
+    #the algorithm part
+    for x in range(len(data['temperature'])):
+        index = x
+        if(not(math.isnan(data['temperature'].office[x]))):
+            
+            #print(data['temperature'].office[x])
+            #if(abs(data['temperature'].office[x]-data['temperature'].median().office)>= 2 * data['temperature'].std().office):
+            if(data['temperature'].office[x] <= lower_bound_office or data['temperature'].office[x] >= upper_bound_office ):
+
+                counter_office += 1
+                #index = data['temperature'].office[x]
+                #print(data['temperature'].office[x])
+                data['temperature'].office[x] = float("NaN")
+                #print(data['temperature'].office[x])
+                indices_office.append(index)
+                #numer_of_data = len(data['temperature'])
+                #print(numer_of_data)
+    for x in range(len(data['temperature'])):
+        index = x
+        if(not(math.isnan(data['temperature'].lab1[x]))):
+            #print(data['temperature'].office[x])
+            #if(abs(data['temperature'].lab1[x]-data['temperature'].median().lab1)>= 2 * data['temperature'].std().lab1):
+            if(data['temperature'].lab1[x] <= lower_bound_lab or data['temperature'].lab1[x] >= upper_bound_lab ):
+
+                counter_lab +=1
+                data['temperature'].lab1[x] = float("NaN")
+                indices_lab.append(index)
+    for x in range(len(data['temperature'])):
+        index = x
+        if(not(math.isnan(data['temperature'].class1[x]))):
+            #print(data['temperature'].office[x])
+            #if(abs(data['temperature'].class1[x]-data['temperature'].median().class1)>= 2 * data['temperature'].std().class1):
+            if(data['temperature'].class1[x] <= lower_bound_class or data['temperature'].class1[x] >= upper_bound_class ):
+
+                counter_class +=1
+                indices_class.append(index)
+                data['temperature'].class1[x] = float("NaN")
+    new_data_office = data['temperature'].office.dropna()
+    new_data_class = data['temperature'].class1.dropna()
+    new_data_lab = data['temperature'].lab1.dropna()
+    #print(counter_class)
+    #print(counter_lab)
+    #print(counter_office)
+    #print(indices_office)
+    
+    #new_data_office = data['temperature'].office.drop(index=indices_office)
+    #for x in range(len(indices_office)):
+
+    #print(data['temperature'].office.drop())
+    #print(data['temperature'].office[712])
+    #new_data_class = data_class.drop(index = indices_class)
+    #new_data_lab = data_lab.drop(index = indices_lab)
     percentage_class =  (number_of_data_class-counter_class)/(number_of_data_class) * 100  
     percentage_lab =  (number_of_data_lab-counter_lab)/(number_of_data_lab) * 100  
     percentage_office =  (number_of_data_office-counter_office)/(number_of_data_office) * 100  
     print("there are ", 100 - percentage_class, " % bad data in class1")
     print("there are ", 100 - percentage_lab, " % bad data in lab1")
     print("there are ", 100 - percentage_office, " % bad data in office")
+    #print if statemnets
+    print('Temperature Median after deleting the bad data in lab1 is:')
+    print(new_data_lab.median())
+    print('Temperature Variance after deleting the bad data in lab1 is::')
+    print(new_data_lab.var())
+    print('Temperature Standard Deviation after deleting the bad data in lab1 is:')
+    print(new_data_lab.std())
+    print('Temperature mean after deleting the bad data in lab1 is:')
+    print(new_data_lab.mean())
+
+    print('Temperature Median after deleting the bad data in the office is:')
+    print(new_data_office.median())
+    print('Temperature Variance after deleting the bad data in the office is::')
+    print(new_data_office.var())
+    print('Temperature Standard Deviation after deleting the bad data in the office is:')
+    print(new_data_office.std())
+    print('Temperature mean after deleting the bad data in the office is:')
+    print(new_data_office.mean())
+    
+    print('Temperature Median after deleting the bad data in the class1 is:')
+    print(new_data_class.median())
+    print('Temperature Variance after deleting the bad data in the class1 is::')
+    print(new_data_class.var())
+    print('Temperature Standard Deviation after deleting the bad data in the class1 is:')
+    print(new_data_class.std())
+    print('Temperature mean after deleting the bad data in the class1 is:')
+    print(new_data_class.mean())
+    
+
+
     plt.show()
     

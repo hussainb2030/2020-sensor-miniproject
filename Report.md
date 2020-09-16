@@ -108,7 +108,7 @@ the upper bound in lab1 is :  26.92393761260452
 Task 4:
 1)how is this simulation reflective of the real world?
 
-     This situation is reflective of the real world with how creating a sensor involves working values such as temperature, occupancy, and CO2 for a room are generated through methods like sensing, measurement, or detection and how data elements like median, mean, and variance are used for determining accuracy. It is also reflective with how it is tested and works with datasets for three different rooms(office, lab, and class) and there are different values for data elements with those as well. The situation is mostly reflective of how the data is handled for devices like sensors. It reflects how data is stored and saved to be analyzed in task 1. Tasks 2 and 3 reflect conductions of analysis of data and organization(detecting and removing bad data) of it.
+   This situation is reflective of the real world with how creating a sensor involves working values such as temperature, occupancy, and CO2 for a room are generated through methods like sensing, measurement, or detection and how data elements like median, mean, and variance are used for determining accuracy. It is also reflective with how it is tested and works with datasets for three different rooms(office, lab, and class) and there are different values for data elements with those as well. The situation is mostly reflective of how the data is handled for devices like sensors. It reflects how data is stored and saved to be analyzed in task 1. Tasks 2 and 3 reflect conductions of analysis of data and organization(detecting and removing bad data) of it.
   
 2)how is this simulation deficient? What factors does it fail to account for?
   

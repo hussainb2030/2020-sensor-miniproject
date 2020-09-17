@@ -17,6 +17,50 @@ import typing as T
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+from scipy.stats import gamma
+
+def plot_time(time: pandas.Series):
+    """
+    make a probability density function estimate based on the data
+    in this simulation, time interval is same distribution for all sensors and rooms
+    https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_continuous.fit.html
+    """
+
+    intervals = time.diff().dropna().dt.total_seconds()
+    Nbin = 100
+
+    Fa, Floc, Fscale = gamma.fit(intervals)
+
+    ti = np.arange(0.01, 5, 0.01)  # arbitrary time interval range to plot over
+    pd = gamma.pdf(ti, Fa, loc=Floc, scale=Fscale)  # fit
+
+    ax = plt.figure().gca()
+    ax.plot(ti, pd)
+    ax.set_xlabel("Time Interval (seconds)")
+    ax.set_ylabel("Probability")
+    ax.set_title("Time interval observed")
+
+    # add the measured data to the plot
+    ax.hist(intervals, bins=Nbin)
+
+def plot_temperature(temp: pandas.Series, name: str):
+    """
+    Plot temperature for a room
+    """
+
+    temp = temp.dropna()
+    # get rid of nuisance empty values with .dropna()
+    ax = plt.figure().gca()
+    temp.hist(ax=ax)
+    ax.set_ylabel("# of occurences")
+    ax.set_xlabel(r"Temperature [$^\circ$C]")
+    ax.set_title(f"{name} temperature")
+
+    ax = plt.figure().gca()
+    ax.plot(temp.index, temp.values)
+    ax.set_xlabel("time")
+    ax.set_ylabel(r"Temperature [$^\circ$C]")
+    ax.set_title(f"{name} temperature")
 
 def load_data(file: Path) -> T.Dict[str, pandas.DataFrame]:
 
@@ -213,6 +257,11 @@ if __name__ == "__main__":
     #new_data_office = data['temperature'].office.drop(index=indices_office)
     #for x in range(len(indices_office)):
 
+    plot_time(data["temperature"].index.to_series())
+
+    plot_temperature(data["temperature"]["office"], "office")
+    plot_temperature(data["temperature"]["lab1"], "lab1")
+    plot_temperature(data["temperature"]["class1"], "class1")
     #print(data['temperature'].office.drop())
     #print(data['temperature'].office[712])
     #new_data_class = data_class.drop(index = indices_class)

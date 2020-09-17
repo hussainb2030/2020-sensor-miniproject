@@ -138,4 +138,4 @@ Task 4:
 4) would it be better to have the server poll the sensors, or the sensors reach out to the server when they have data?
   
   
-     If the sensors reach out to the server when they have the data, then there would have been more values for the dataset. This could lead to more bad data values being taken out or eliminated from the data and more good data points to be evaluated. so it would better to have teh sever poll the sensors.
+     If the sensors reach out to the server when they have the data, then there would have been more values for the dataset. This could lead to more bad data values being taken out or eliminated from the data and more good data points to be evaluated. so it would better to have teh sever poll the sensors. I think the simulation would be better in general if there was more data(values for temperature, co2, and occupancy) to analyze.

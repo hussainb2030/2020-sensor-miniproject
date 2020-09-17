@@ -129,7 +129,7 @@ Task 4:
   
 2)how is this simulation deficient? What factors does it fail to account for?
   
-   yes this simulation is feficient. As a matter of fact, The simulation involves the upper and lower bounds and observes data without bad numbers/elements for temperature. It doens't do the same for the occupancy and the co2. It may be possible that there could be anomalies in occupancy and co2. If there are, then there are good and bad values for temperature mixed with good and bad values for the occupancy and co2. It also might be from opening doors, changing the AC, the amount of people in that room.
+   yes this simulation is feficient. As a matter of fact, The simulation involves the upper and lower bounds and observes data without bad numbers/elements for temperature. It doens't do the same for the occupancy and the co2. It may be possible that there could be anomalies in occupancy and co2. If there are, then there are good and bad values for temperature mixed with good and bad values for the occupancy and co2. It also might be from opening doors, changing the AC, the amount of people in that room. There could be more things that impact the temperature and the amount of co2 in the rooms.  
   
 3)how is the difficulty of initially using this Python websockets library as compared to a compiled language e.g. C++ websockets
   

@@ -2,6 +2,7 @@
    
    Task0: 
    Server to the client: ECE Senior Capstone IoT simulator
+   
    Server: IoT server starting:  localhost port 8765
    
    
@@ -109,7 +110,7 @@ Temperature mean after deleting the bad data in the class1 is:
 27.043830418866467
 
 2) 
-     A persistent change in temperature in that are within the the lower and upper bounds may not indicate a failure in the sensor. If there were changes in temperature that included values outside of the upper and lower bounds, then it could indicate a failure in the sensor. This is because the values would have to much variation to determine a median, average, and variance. A small change in tempraeture can be due to opening doors, AC, or the amount of people in that specific room.
+     A persistent change in temperature in that are within the the lower and upper bounds may not indicate a failure in the sensor. If there were changes in temperature that included values outside of the upper and lower bounds, then it could indicate a failure in the sensor. This is because the values would have to much variation to determine a median, average, and variance. A small change in temperature can be due to opening doors, AC, or the amount of people in that specific room.
 
 
 

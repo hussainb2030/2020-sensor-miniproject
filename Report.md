@@ -74,26 +74,37 @@ there are  2.3809523809523796  % bad data in office
 
 Temperature Median after deleting the bad data in lab1 is:
 20.994435558276656
+
 Temperature Variance after deleting the bad data in lab1 is::
 0.32824379224355804
+
 Temperature Standard Deviation after deleting the bad data in lab1 is:
 0.5729256428573939
+
 Temperature mean after deleting the bad data in lab1 is:
 21.009820902956854
+
 Temperature Median after deleting the bad data in the office is:
 22.998572586275085
+
 Temperature Variance after deleting the bad data in the office is::
 0.734443061630806
+
 Temperature Standard Deviation after deleting the bad data in the office is:
 0.8569965353668625
+
 Temperature mean after deleting the bad data in the office is:
 22.969585122294244
+
 Temperature Median after deleting the bad data in the class1 is:
 26.9900509692592
+
 Temperature Variance after deleting the bad data in the class1 is::
 5.420973367786927
+
 Temperature Standard Deviation after deleting the bad data in the class1 is:
 2.3282983846120167
+
 Temperature mean after deleting the bad data in the class1 is:
 27.043830418866467
 

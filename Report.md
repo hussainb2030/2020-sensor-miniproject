@@ -1,8 +1,9 @@
                                                               Senior Design REPORT
    
    Task0: 
-   IoT server starting:  localhost port 8765
-   ECE Senior Capstone IoT simulator
+   Server to the client: ECE Senior Capstone IoT simulator
+   Server: IoT server starting:  localhost port 8765
+   
    
    Task1:
    The file that we stored our data is data2.txt
@@ -51,8 +52,6 @@ d)
 i: 
 Time mean is :  1.1018134946502058
 Time median is :  0.714519
-Time variation is :  19.935841859922757
-Time standard deviation is :  4.4649570949699795
 ii)
 The plots are going to be generated when you run the code "analyze.py"
 iii)
@@ -66,7 +65,7 @@ there are  1.242236024844729  % bad data in class1
 there are  0.7246376811594217  % bad data in lab1
 there are  2.3809523809523796  % bad data in office
 
-emperature Median after deleting the bad data in lab1 is:
+Temperature Median after deleting the bad data in lab1 is:
 20.994435558276656
 Temperature Variance after deleting the bad data in lab1 is::
 0.32824379224355804
@@ -92,7 +91,7 @@ Temperature mean after deleting the bad data in the class1 is:
 27.043830418866467
 
 2) 
-     A persistent change in temperature in that are within the the lower and upper bounds may not indicate a failure in the sensor. If there were changes in temperature that included values outside of the upper and lower bounds, then it could indicate a failure in the sensor. This is because the values would have to much variation to determine a median, average, and variance. 
+     A persistent change in temperature in that are within the the lower and upper bounds may not indicate a failure in the sensor. If there were changes in temperature that included values outside of the upper and lower bounds, then it could indicate a failure in the sensor. This is because the values would have to much variation to determine a median, average, and variance. A small change in tempraeture can be due to opening doors, AC, or the amount of people in that specific room.
 
 
 
@@ -108,17 +107,17 @@ the upper bound in lab1 is :  26.92393761260452
 Task 4:
 1)how is this simulation reflective of the real world?
 
-   This situation is reflective of the real world with how creating a sensor involves working values such as temperature, occupancy, and CO2 for a room are generated through methods like sensing, measurement, or detection and how data elements like median, mean, and variance are used for determining accuracy. It is also reflective with how it is tested and works with datasets for three different rooms(office, lab, and class) and there are different values for data elements with those as well. The situation is mostly reflective of how the data is handled for devices like sensors. It reflects how data is stored and saved to be analyzed in task 1. Tasks 2 and 3 reflect conductions of analysis of data and organization(detecting and removing bad data) of it.
+   This situation is reflective of the real world with how creating a sensor involves working values such as temperature, occupancy, and CO2 for a room are generated through methods like sensing, measurement, or detection and how data elements like median, mean, and variance are used for determining accuracy. It is also reflective with how it is tested and works with datasets for three different rooms(office, lab, and class) and there are different values for data elements with those as well. The situation is mostly reflective of how the data is handled for devices like sensors. It reflects how data is stored and saved to be analyzed in task 1. Tasks 2 and 3 reflect conductions of analysis of data and organization(detecting and removing bad data) of it. The graphs also mimics a well-known distribution which means the data here are reflective of the real worls to the extent.
   
 2)how is this simulation deficient? What factors does it fail to account for?
   
-   The simulation involves the upper and lower bounds and observes data without bad numbers/elements for temperature. It doens't do the same for the occupancy and the co2. It may be possible that there could be anomalies in occupancy and co2. If there are, then there are good and bad values for temperature mixed with good and bad values for the occupancy and co2. 
+   yes this simulation is feficient. As a matter of fact, The simulation involves the upper and lower bounds and observes data without bad numbers/elements for temperature. It doens't do the same for the occupancy and the co2. It may be possible that there could be anomalies in occupancy and co2. If there are, then there are good and bad values for temperature mixed with good and bad values for the occupancy and co2. It also might be from opening doors, changing the AC, the amount of people in that room.
   
 3)how is the difficulty of initially using this Python websockets library as compared to a compiled language e.g. C++ websockets
   
-   The difficulty in learning and using the attributes in the library is close to the same of learning compiled language. The difficulty in working with the websockets was figuring out how to use the pandas dataframe.
+   The difficulty in learning and using the attributes in the library is close to the same of learning compiled language. The difficulty in working with the websockets was figuring out how to use the pandas dataframe. However, the build in functions in python make it so much easier compare to c++,c or Jave.
   
 4) would it be better to have the server poll the sensors, or the sensors reach out to the server when they have data?
   
   
-     If the sensors reach out to the server when they have the data, then there would have been more values for the dataset. This could lead to more bad data values being taken out or eliminated from the data and more good data points to be evaluated. 
+     If the sensors reach out to the server when they have the data, then there would have been more values for the dataset. This could lead to more bad data values being taken out or eliminated from the data and more good data points to be evaluated. so it would better to have teh sever poll the sensors.

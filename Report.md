@@ -11,18 +11,25 @@
    Task2:
    a)
    Temperature Median is:
+   
 class1    26.992625
 lab1      20.994436
 office    22.998259
+
 Temperature Variance is:
+
 class1    116.107775
 lab1        8.768652
 office      8.701145
+
 Temperature Standard Deviation is:
+
 class1    10.775332
 lab1       2.961191
 office     2.949770
+
 Temperature mean is:
+
 class1    27.816794
 lab1      21.001556
 office    22.994437

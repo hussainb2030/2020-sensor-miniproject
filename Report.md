@@ -53,7 +53,7 @@ lab1       4.803140
 office     1.969925
 
 c)
-The plots are going to be generated when you run the code "analyze.py"
+the plots are in "plot.docx" file. Moreover, The plots are going to be generated when you run the code "analyze.py"
 
 d)
 i: 
